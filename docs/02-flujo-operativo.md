@@ -1,11 +1,11 @@
 # Flujo Operativo de Ocre OS
 
 **Estado:** Borrador  
-**Versión:** 0.1
+**Versión:** 0.2
 
 ## 1. Propósito
 
-Definir el ciclo de vida de una atención dentro de Ocre OS, desde el primer contacto hasta la documentación y seguimiento del trabajo realizado.
+Definir el ciclo de vida de una atención dentro de Ocre OS, desde la primera interacción hasta la documentación, seguimiento y cierre del trabajo realizado.
 
 ---
 
@@ -22,15 +22,17 @@ Interacción
 → Reporte
 → Seguimiento o cierre
 
-Esta cadena representa una secuencia lógica del negocio y no una relación obligatoria uno a uno entre objetos.
+Cuando una Interacción todavía no puede relacionarse con suficiente certeza con una persona, Organización, Solicitud o Caso existente, podrá permanecer provisionalmente como **Contacto 0 (C0)** mientras se completa su clasificación.
 
-Una interacción puede relacionarse directamente con información ya existente y no necesariamente generar una nueva Solicitud o un nuevo Caso.
+La cadena anterior representa una secuencia lógica del negocio y no una relación obligatoria uno a uno entre objetos.
 
 Ejemplos:
 
-- una interacción puede generar una nueva Solicitud;
-- una interacción puede agregarse a un Caso existente;
-- una Solicitud puede resolverse sin requerir una visita;
+- una Interacción puede generar una nueva Solicitud;
+- una Interacción puede relacionarse con una Solicitud existente;
+- una Interacción puede agregarse a un Caso existente;
+- una Interacción puede permanecer temporalmente como Contacto 0 mientras se identifica su contexto;
+- una Solicitud puede resolverse sin requerir una Visita;
 - un Caso puede contener múltiples Servicios;
 - un Servicio puede requerir múltiples Visitas;
 - una Visita puede generar uno o varios Reportes;
@@ -40,19 +42,15 @@ Ocre OS debe preservar la continuidad de la información independientemente del 
 
 ---
 
-## 3. Contacto 0
+## 3. Interacción
 
-### Propósito
+### Definición
 
-Registrar toda nueva interacción entrante que todavía no ha sido clasificada dentro del contexto existente de Ocre OS.
+Evento de comunicación entre una persona y Ocre.
 
-Un Contacto 0 puede corresponder tanto a una persona desconocida como a un cliente, contacto, organización, solicitud o caso ya existente.
+Una Interacción existe desde el momento en que Ocre recibe o registra una comunicación, independientemente de que todavía se conozca o no la identidad de la persona, la Organización relacionada o el motivo completo del contacto.
 
-El sistema no debe asumir que una nueva interacción representa necesariamente una nueva persona, una nueva solicitud o un nuevo caso.
-
-### Entra cuando
-
-Ocre recibe una nueva interacción por cualquier canal, por ejemplo:
+Puede producirse mediante:
 
 - llamada;
 - WhatsApp;
@@ -63,85 +61,45 @@ Ocre recibe una nueva interacción por cualquier canal, por ejemplo:
 - contacto presencial;
 - u otro medio.
 
-### Debe conservar como mínimo
-
-- fecha y hora;
-- canal;
-- identificador disponible del origen;
-- contenido o resumen de la interacción;
-- información proporcionada;
-- origen o referencia, cuando exista;
-- y responsable de clasificación o seguimiento.
-
-### Durante su clasificación
-
-El sistema deberá intentar determinar si la interacción corresponde a:
-
-- una persona ya existente;
-- una organización existente;
-- una solicitud existente;
-- un caso existente;
-- una nueva necesidad;
-- una nueva persona u organización;
-- o información que no requiere acción adicional.
-
-### Regla de conservación
-
-Una interacción nunca debe eliminarse únicamente porque la información asociada ya exista.
-
-Cuando una interacción corresponda a información existente, deberá relacionarse con el registro correcto y conservarse como parte de su historial.
-
-Ejemplos:
-
-- un cliente vuelve a preguntar por una solicitud ya abierta;
-- una persona genera nuevamente una solicitud porque no encontró cómo dar seguimiento a la anterior;
-- un operador utiliza un canal diferente para consultar el mismo caso;
-- un cliente vuelve a proporcionar datos que ya estaban registrados;
-- una persona intenta contactar varias veces antes de recibir respuesta.
-
-Estas interacciones pueden no generar una nueva solicitud ni un nuevo caso, pero constituyen información operativa relevante.
-
-### Resultado posible
-
-Un Contacto 0 puede:
-
-- generar una nueva Solicitud;
-- relacionarse con una Solicitud existente;
-- relacionarse con un Caso existente;
-- actualizar información de un Contacto u Organización;
-- generar una acción de seguimiento;
-- registrarse únicamente como interacción;
-- o cerrarse sin acción posterior.
-
-### Principio
-
-**Cerrar un Contacto 0 no significa descartar la interacción.**
-
-El registro debe permanecer disponible para trazabilidad y análisis histórico.
-
-## 3.1 Interacción
-
-### Definición
-
-Evento de comunicación entre una persona y Ocre.
-
-Una interacción puede producirse mediante cualquier canal y puede estar relacionada con:
+Una Interacción puede relacionarse posteriormente con:
 
 - un Contacto;
 - una Organización;
 - una Solicitud;
 - un Caso;
-- una cita;
-- un servicio;
-- o ningún elemento identificado todavía.
+- una Cita;
+- un Servicio;
+- o ningún elemento adicional si solo requiere conservarse como antecedente.
 
-### Propósito
+### Debe conservar como mínimo
 
-Mantener un historial cronológico de comunicaciones sin obligar a que cada comunicación genere un nuevo objeto de negocio.
+- fecha y hora;
+- canal;
+- identificador disponible del origen;
+- contenido o resumen de la comunicación;
+- información proporcionada;
+- origen o referencia, cuando exista;
+- y responsable de clasificación o seguimiento.
+
+### Regla de conservación
+
+Una Interacción nunca debe eliminarse únicamente porque la información asociada ya exista.
+
+Cuando corresponda a información existente, deberá relacionarse con el registro correcto y conservarse como parte de su historial.
+
+Ejemplos:
+
+- un cliente vuelve a preguntar por una Solicitud ya abierta;
+- una persona genera nuevamente una Solicitud porque no encontró cómo dar seguimiento a la anterior;
+- un operador utiliza un canal diferente para consultar el mismo Caso;
+- un cliente vuelve a proporcionar datos que ya estaban registrados;
+- una persona intenta contactar varias veces antes de recibir respuesta.
+
+Estas Interacciones pueden no generar una nueva Solicitud ni un nuevo Caso, pero constituyen información operativa relevante.
 
 ### Valor futuro
 
-El historial de interacciones podrá utilizarse para analizar:
+El historial de Interacciones podrá utilizarse para analizar:
 
 - frecuencia de contacto;
 - tiempos de respuesta;
@@ -150,6 +108,53 @@ El historial de interacciones podrá utilizarse para analizar:
 - necesidades de capacitación;
 - efectividad de canales;
 - y calidad del seguimiento.
+
+---
+
+## 3.1 Contacto 0 (C0)
+
+### Definición
+
+Contacto 0 es una **clasificación provisional**, no una persona, una empresa ni una Interacción diferente.
+
+Se utiliza cuando existe una Interacción real, pero todavía no hay información suficiente para relacionarla de manera confiable con los elementos existentes de Ocre OS o para determinar qué proceso debe iniciar.
+
+### Entra cuando
+
+Una Interacción requiere clasificación adicional porque todavía existe incertidumbre relevante sobre uno o varios de estos puntos:
+
+- quién está contactando;
+- a qué Organización pertenece;
+- si ya existe en el sistema;
+- si existe una Solicitud relacionada;
+- si existe un Caso relacionado;
+- cuál es la necesidad concreta;
+- o qué acción debe realizarse.
+
+### Sale cuando
+
+Existe información suficiente para clasificar la Interacción y decidir su relación o siguiente acción.
+
+### Resultados posibles
+
+Un Contacto 0 puede terminar:
+
+- relacionado con un Contacto existente;
+- relacionado con una Organización existente;
+- relacionado con una Solicitud existente;
+- relacionado con un Caso existente;
+- generando una nueva Solicitud;
+- actualizando información ya existente;
+- generando un Pendiente;
+- o cerrándose sin acción posterior.
+
+### Principio
+
+**Resolver o cerrar un Contacto 0 no elimina la Interacción que lo originó.**
+
+La Interacción permanece como parte del historial y de la trazabilidad del sistema.
+
+---
 
 ## 3.2 Clasificación inicial
 
@@ -161,7 +166,7 @@ La clasificación inicial evita generar innecesariamente nuevas Solicitudes o Ca
 
 ### Durante la clasificación se debe intentar determinar
 
-- quién está realizando la interacción;
+- quién está realizando la Interacción;
 - a qué Organización pertenece;
 - si existe un Equipo relacionado;
 - si existe una Solicitud relacionada;
@@ -194,22 +199,26 @@ Cuando exista incertidumbre razonable sobre su relación con un Caso anterior, d
 ## 4. Solicitud
 
 ### Entra cuando
+
 Existe una necesidad suficientemente clara como para requerir análisis, respuesta, seguimiento o ejecución.
 
 ### Debe conservar
+
 - quién solicita;
 - qué expresó originalmente;
 - necesidad percibida;
-- organización, si se conoce;
-- equipo, si se conoce;
+- Organización, si se conoce;
+- Equipo, si se conoce;
 - urgencia;
 - evidencia inicial;
 - siguiente acción.
 
 ### Sale cuando
-La atención requiere seguimiento estructurado.
+
+La atención requiere seguimiento estructurado o se determina que no continuará.
 
 ### Resultado posible
+
 - creación de Caso;
 - resolución directa;
 - rechazo;
@@ -221,26 +230,30 @@ La atención requiere seguimiento estructurado.
 ## 5. Caso
 
 ### Propósito
+
 Agrupar todo el seguimiento relacionado con una necesidad concreta.
 
 ### Puede contener
+
 - comunicaciones;
-- solicitudes;
-- servicios;
+- Solicitudes;
+- Servicios;
 - cotizaciones;
 - pagos;
-- citas;
-- visitas;
-- reportes;
+- Citas;
+- Visitas;
+- Reportes;
 - refacciones;
-- pendientes;
+- Pendientes;
 - decisiones;
 - evidencias.
 
 ### Regla provisional
+
 Un Caso representa continuidad de atención, no una sola actividad.
 
 ### Estados preliminares
+
 - nuevo;
 - pendiente de información;
 - pendiente de cotización;
@@ -249,6 +262,7 @@ Un Caso representa continuidad de atención, no una sola actividad.
 - en atención;
 - esperando refacción;
 - esperando respuesta del cliente;
+- en evaluación de reincidencia;
 - pendiente de validación;
 - cerrado;
 - cancelado.
@@ -260,9 +274,11 @@ Estos estados deberán validarse con procesos reales antes de considerarse defin
 ## 6. Servicio
 
 ### Propósito
+
 Representar trabajo profesional específico ejecutado por Ocre.
 
 ### Ejemplos
+
 - Diagnóstico General Inicial;
 - reparación;
 - mantenimiento;
@@ -273,6 +289,7 @@ Representar trabajo profesional específico ejecutado por Ocre.
 - consultoría.
 
 ### Regla
+
 Un Caso puede contener uno o varios Servicios.
 
 Un Servicio puede requerir una o varias Visitas.
@@ -282,12 +299,14 @@ Un Servicio puede requerir una o varias Visitas.
 ## 7. Visita
 
 ### Propósito
-Representar una intervención programada en una ubicación o mediante una sesión remota.
+
+Representar una intervención programada en una Ubicación o mediante una sesión remota.
 
 ### Debe registrar
+
 - fecha;
 - horario;
-- ubicación;
+- Ubicación;
 - técnicos participantes;
 - actividades;
 - tiempos;
@@ -295,35 +314,39 @@ Representar una intervención programada en una ubicación o mediante una sesió
 - mediciones;
 - hallazgos;
 - intervenciones;
-- pendientes;
+- Pendientes;
 - resultado.
 
 ### Regla
-Una visita no equivale necesariamente a un servicio completo.
+
+Una Visita no equivale necesariamente a un Servicio completo.
 
 ---
 
 ## 8. Reporte
 
 ### Propósito
+
 Comunicar formalmente al cliente el trabajo realizado y su resultado.
 
 ### Debe poder derivarse de
+
 - una Visita;
 - un Servicio;
 - una etapa del Caso;
 - o el cierre completo del Caso.
 
 ### Debe reflejar
-- solicitud original;
+
+- Solicitud original;
 - necesidad identificada;
-- equipo atendido;
+- Equipo atendido;
 - diagnóstico;
 - actividades;
 - evidencias;
 - intervenciones;
 - resultados;
-- pendientes;
+- Pendientes;
 - recomendaciones;
 - estado final.
 
@@ -333,13 +356,15 @@ Comunicar formalmente al cliente el trabajo realizado y su resultado.
 
 Las transiciones dentro de Ocre OS deben responder a eventos reales del negocio.
 
-Una nueva interacción no genera automáticamente una nueva Solicitud ni un nuevo Caso.
+Una nueva Interacción no genera automáticamente una nueva Solicitud ni un nuevo Caso.
 
 ---
 
 ### 9.1 Interacción → Clasificación inicial
 
 Toda nueva comunicación entra primero como Interacción.
+
+Si la información disponible es insuficiente para clasificarla con certeza, la Interacción puede permanecer provisionalmente como Contacto 0.
 
 Durante su clasificación se determina si corresponde a:
 
@@ -376,15 +401,15 @@ Un Caso puede incluir:
 - cotizaciones;
 - pagos;
 - agenda;
-- servicios;
-- visitas;
+- Servicios;
+- Visitas;
 - refacciones;
-- reportes;
-- pendientes;
+- Reportes;
+- Pendientes;
 - seguimiento;
 - y decisiones.
 
-La creación de un Caso no implica necesariamente que exista todavía un diagnóstico o un servicio autorizado.
+La creación de un Caso no implica necesariamente que exista todavía un diagnóstico o un Servicio autorizado.
 
 ---
 
