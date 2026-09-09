@@ -1,14 +1,14 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, ConfigDict
 
 
 class OrganizacionCreate(BaseModel):
     nombre_comercial: str
     nombre_legal: str | None = None
     telefono_principal: str | None = None
-    email_general: EmailStr | None = None
+    email_general: str | None = None
     sitio_web: str | None = None
     estado_relacion: str | None = "cliente"
     notas: str | None = None
