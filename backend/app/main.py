@@ -15,8 +15,16 @@ app = FastAPI(
 app.include_router(organizations_router, prefix="/api/v1")
 
 
+@app.get("/health/live", tags=["system"])
+def health_live() -> dict[str, str]:
+    return {
+        "status": "ok",
+        "environment": settings.env,
+    }
+
+
 @app.get("/health", tags=["system"])
-def health() -> dict[str, str]:
+def health_ready() -> dict[str, str]:
     try:
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
