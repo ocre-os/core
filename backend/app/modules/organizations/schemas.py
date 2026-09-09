@@ -1,16 +1,16 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class OrganizacionCreate(BaseModel):
-    nombre_comercial: str
-    nombre_legal: str | None = None
-    telefono_principal: str | None = None
-    email_general: str | None = None
-    sitio_web: str | None = None
-    estado_relacion: str | None = "cliente"
+    nombre_comercial: str = Field(max_length=200)
+    nombre_legal: str | None = Field(default=None, max_length=250)
+    telefono_principal: str | None = Field(default=None, max_length=40)
+    email_general: str | None = Field(default=None, max_length=320)
+    sitio_web: str | None = Field(default=None, max_length=500)
+    estado_relacion: str | None = Field(default="cliente", max_length=60)
     notas: str | None = None
 
 
