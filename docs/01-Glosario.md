@@ -1,7 +1,7 @@
 # Glosario de Ocre OS
 
 **Estado:** Borrador  
-**Versión:** 0.1
+**Versión:** 0.2
 
 ## 1. Propósito
 
@@ -37,13 +37,11 @@ Posteriormente se decide cómo representarlo en software.
 
 ---
 
-# 3. Contacto 0 (C0)
+# 3. Interacción
 
 ## Definición
 
-Primer registro de una interacción potencialmente relevante para Ocre.
-
-Representa el momento en que aparece una persona, organización o necesidad que todavía no ha sido suficientemente identificada o clasificada.
+Evento de comunicación entre una persona y Ocre, independientemente de que al momento de registrarlo se conozca o no con certeza la identidad, la Organización relacionada o el motivo completo del contacto.
 
 Puede originarse mediante:
 
@@ -51,25 +49,59 @@ Puede originarse mediante:
 - WhatsApp;
 - correo electrónico;
 - formulario;
+- mensaje desde el portal;
 - referencia;
-- recomendación;
 - contacto presencial;
 - u otro medio.
 
-Un Contacto 0 puede contener información mínima.
+Una Interacción existe como registro histórico desde que ocurre y puede posteriormente relacionarse con:
 
-Ejemplos:
+- un Contacto;
+- una Organización;
+- una Solicitud;
+- un Caso;
+- una Cita;
+- un Servicio;
+- o ningún elemento adicional si solamente requiere conservarse como antecedente.
 
-- un número telefónico desconocido que pregunta por reparación de una máquina;
-- una persona referida por otro cliente;
-- un correo solicitando información;
-- alguien que pregunta por un servicio sin proporcionar todavía los datos de su empresa.
+## Importante
+
+Una Interacción no significa automáticamente:
+
+- una nueva persona;
+- una nueva Solicitud;
+- un nuevo Caso;
+- una venta;
+- ni un Servicio.
+
+Una Interacción no debe eliminarse únicamente porque repita información ya existente. La repetición puede aportar información operativa sobre frecuencia de contacto, dificultades de seguimiento, uso de la plataforma o necesidades de capacitación.
+
+---
+
+## 3.1 Contacto 0 (C0)
+
+## Definición
+
+Clasificación provisional utilizada cuando existe una Interacción real, pero todavía no hay información suficiente para relacionarla de manera confiable con los elementos existentes de Ocre OS o para determinar qué proceso debe iniciar.
+
+Contacto 0 no representa una persona, una Organización ni una Interacción adicional.
+
+Puede utilizarse, por ejemplo, cuando todavía se desconoce:
+
+- quién está contactando;
+- a qué Organización pertenece;
+- si ya existe en el sistema;
+- si existe una Solicitud relacionada;
+- si existe un Caso relacionado;
+- cuál es la necesidad concreta;
+- o qué acción debe realizarse.
 
 ## No significa
 
 Un Contacto 0 no es necesariamente:
 
 - un cliente;
+- un prospecto;
 - una venta;
 - un servicio;
 - una oportunidad comercial;
@@ -77,7 +109,20 @@ Un Contacto 0 no es necesariamente:
 
 ## Evolución
 
-El Contacto 0 deberá poder relacionarse posteriormente con información más completa sin perder el registro de su origen.
+Contacto 0 deja de ser necesario cuando la Interacción puede clasificarse con suficiente certeza.
+
+Al resolverse puede:
+
+- relacionarse con un Contacto existente;
+- relacionarse con una Organización existente;
+- relacionarse con una Solicitud existente;
+- relacionarse con un Caso existente;
+- generar una nueva Solicitud;
+- actualizar información existente;
+- generar un Pendiente;
+- o cerrarse sin acción posterior.
+
+Resolver o cerrar C0 no elimina la Interacción que lo originó.
 
 **Abreviatura de trabajo:** C0.
 
@@ -167,11 +212,11 @@ Persona u organización identificada que presenta posibilidad razonable de conve
 
 Este término podrá utilizarse para clasificación comercial, pero no sustituye a Contacto 0.
 
-Un Contacto 0 puede convertirse en prospecto después de obtener información suficiente.
+Una Interacción provisionalmente clasificada como C0 puede, al resolverse, identificar a una persona u Organización que posteriormente sea clasificada como prospecto.
 
 ## Observación
 
-No todo Contacto 0 debe considerarse prospecto.
+No toda Interacción ni todo C0 debe producir un prospecto.
 
 ---
 
@@ -231,7 +276,7 @@ La necesidad constituye una de las referencias principales para evaluar si Ocre 
 
 Expresión concreta de una necesidad que requiere análisis, respuesta, seguimiento o ejecución por parte de Ocre.
 
-Una solicitud puede originarse desde un Contacto 0, un cliente existente u otro proceso.
+Una Solicitud puede originarse desde una Interacción, incluida una Interacción provisionalmente clasificada como C0, desde un cliente existente o desde otro proceso.
 
 Ejemplos:
 
