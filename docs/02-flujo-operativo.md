@@ -329,29 +329,237 @@ Comunicar formalmente al cliente el trabajo realizado y su resultado.
 
 ---
 
-## 9. Transiciones
+## 9. Transiciones y continuidad de los casos
 
-Las transiciones entre etapas deben ocurrir por eventos reales del negocio.
+Las transiciones dentro de Ocre OS deben responder a eventos reales del negocio.
+
+Una nueva interacción no genera automáticamente una nueva Solicitud ni un nuevo Caso.
+
+---
+
+### 9.1 Interacción → Clasificación inicial
+
+Toda nueva comunicación entra primero como Interacción.
+
+Durante su clasificación se determina si corresponde a:
+
+- información nueva;
+- una Solicitud existente;
+- un Caso existente;
+- una necesidad nueva;
+- una posible reincidencia;
+- o una comunicación que únicamente debe conservarse en el historial.
+
+---
+
+### 9.2 Clasificación inicial → Solicitud
+
+Se genera una nueva Solicitud cuando se identifica una necesidad que:
+
+- no pertenece razonablemente a una Solicitud existente;
+- requiere respuesta, análisis, seguimiento o ejecución;
+- y posee información suficiente para comenzar su atención.
+
+La Solicitud debe conservar siempre la expresión original de la necesidad del cliente.
+
+---
+
+### 9.3 Solicitud → Caso
+
+Una Solicitud genera un Caso cuando requiere continuidad estructurada de atención.
+
+Un Caso puede incluir:
+
+- comunicaciones;
+- investigación;
+- diagnóstico;
+- cotizaciones;
+- pagos;
+- agenda;
+- servicios;
+- visitas;
+- refacciones;
+- reportes;
+- pendientes;
+- seguimiento;
+- y decisiones.
+
+La creación de un Caso no implica necesariamente que exista todavía un diagnóstico o un servicio autorizado.
+
+---
+
+### 9.4 Caso → Servicio
+
+Se genera o relaciona un Servicio cuando existe una actividad profesional concreta que Ocre deberá ejecutar.
 
 Ejemplos:
 
-- Contacto 0 → Solicitud:
-  se identifica una necesidad concreta.
+- Diagnóstico General Inicial;
+- diagnóstico específico;
+- reparación;
+- mantenimiento;
+- calibración;
+- modificación;
+- instalación;
+- capacitación;
+- consultoría.
 
-- Solicitud → Caso:
-  la necesidad requiere seguimiento estructurado.
+Un mismo Caso puede contener múltiples Servicios.
 
-- Caso → Servicio:
-  se autoriza o define una actividad técnica concreta.
+---
 
-- Servicio → Visita:
-  se programa ejecución presencial o remota.
+### 9.5 Servicio → Visita
 
-- Visita → Reporte:
-  existe información suficiente para documentar lo realizado.
+Se genera una Visita cuando una actividad requiere una intervención programada presencial o remota.
 
-- Caso → Cerrado:
-  no quedan acciones dentro del alcance acordado.
+Un Servicio puede requerir múltiples Visitas.
+
+Una Visita no implica por sí misma que el Servicio haya concluido.
+
+---
+
+### 9.6 Visita → Reporte
+
+Cuando exista información suficiente sobre el trabajo ejecutado deberá poder generarse un Reporte.
+
+El Reporte debe construirse principalmente a partir de la información capturada durante la operación y no mediante reconstrucción posterior de memoria.
+
+---
+
+## 10. Reincidencias y reapertura de casos
+
+### 10.1 Principio de presunción de continuidad
+
+Cuando exista una nueva incidencia en un Equipo recientemente intervenido y sea lógica o técnicamente posible una relación con el trabajo anterior, Ocre OS deberá favorecer inicialmente la continuidad del Caso anterior.
+
+Esto no significa afirmar que la nueva incidencia tenga la misma causa.
+
+Significa que primero deberá descartarse razonablemente la relación con la intervención anterior antes de fragmentar el historial.
+
+---
+
+### 10.2 Reapertura provisional
+
+Un Caso cerrado podrá reabrirse provisionalmente cuando exista una nueva Interacción potencialmente relacionada con él.
+
+La reapertura deberá registrar explícitamente el motivo.
+
+Ejemplo:
+
+> Posible reincidencia posterior a intervención. Pendiente determinar relación con Caso anterior.
+
+El Caso deberá entrar en un estado que represente esta incertidumbre.
+
+**Estado provisional sugerido:**
+
+`En evaluación de reincidencia`
+
+Este nombre queda sujeto a validación posterior.
+
+---
+
+### 10.3 Clasificación técnica de la reincidencia
+
+La relación entre la nueva incidencia y el Caso anterior no deberá decidirse únicamente por:
+
+- cercanía temporal;
+- similitud superficial del síntoma;
+- opinión del cliente;
+- o pertenecer al mismo Equipo.
+
+La clasificación podrá requerir preguntas técnicas y posteriormente diagnóstico en sitio.
+
+Las preguntas deberán adaptarse al historial real del Equipo y a la intervención realizada anteriormente.
+
+Ejemplos de información relevante:
+
+- síntoma actual;
+- momento en que apareció;
+- comportamiento del Equipo desde la intervención anterior;
+- tiempo que funcionó correctamente;
+- operador actual;
+- cambios realizados;
+- condiciones de operación;
+- archivos utilizados;
+- intervenciones posteriores;
+- y estado de los componentes previamente reparados.
+
+---
+
+### 10.4 Resultados de la evaluación
+
+Después de obtener evidencia suficiente pueden ocurrir al menos cuatro resultados.
+
+#### A. Continuación del Caso anterior
+
+Se determina que la nueva incidencia forma parte de la misma problemática.
+
+El Caso continúa abierto y se conserva toda la información dentro del mismo historial.
+
+#### B. Reincidencia relacionada
+
+Se identifica una nueva manifestación o consecuencia relacionada con la intervención anterior.
+
+El Caso anterior continúa siendo la referencia principal y se documenta la relación.
+
+#### C. Problema independiente
+
+Se determina que la nueva incidencia no corresponde al Caso anterior.
+
+Se crea un nuevo Caso y se conserva una relación explícita con el Caso que originó la investigación.
+
+Ejemplo:
+
+> Caso 161 creado durante la evaluación de reincidencia del Caso 154. Se determinó que la nueva falla es independiente.
+
+#### D. Problemas simultáneos
+
+Se determina que existe continuidad de la falla anterior y, adicionalmente, una nueva problemática independiente.
+
+El Caso original continúa abierto y se genera además un nuevo Caso relacionado.
+
+---
+
+### 10.5 Responsabilidad y asignación técnica
+
+La posible relación con una intervención anterior debe influir en la asignación del técnico.
+
+Cuando exista una reincidencia potencial, deberá considerarse preferentemente al técnico que realizó la intervención anterior, debido a su conocimiento del contexto.
+
+Sin embargo, esto no será una regla absoluta.
+
+Ocre OS deberá permitir asignar otro técnico cuando:
+
+- el técnico anterior no esté disponible;
+- la especialidad requerida sea diferente;
+- la urgencia lo requiera;
+- o exista otra razón operativa válida.
+
+El nuevo técnico deberá tener acceso al historial completo necesario para continuar la atención.
+
+---
+
+### 10.6 Trazabilidad de la decisión
+
+Toda decisión de:
+
+- reabrir;
+- continuar;
+- separar;
+- crear un nuevo Caso;
+- o relacionar múltiples Casos
+
+deberá conservar el motivo de la decisión y la evidencia disponible.
+
+El sistema no deberá borrar la incertidumbre que existió durante el proceso.
+
+Debe ser posible reconstruir posteriormente:
+
+1. qué reportó el cliente;
+2. por qué se sospechó una reincidencia;
+3. qué se investigó;
+4. qué evidencia se obtuvo;
+5. y por qué finalmente se decidió continuar o crear otro Caso.
 
 ---
 
