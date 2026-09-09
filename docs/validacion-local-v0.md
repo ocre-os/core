@@ -19,6 +19,8 @@ Fecha: 2026-09-09. Rama: `feat/v0-foundation`.
   SQLAlchemy 2.0.52, Alembic 1.19.2 y psycopg 3.3.5; pytest 8.4.2 en desarrollo.
 - Autenticación local con hash `scrypt`, tokens HMAC con expiración y registro
   inicial de un único usuario mientras la tabla `usuario` está vacía.
+- Autorización interna inicial con roles `admin` y `tecnico`: el primer usuario
+  es `admin`; solo `admin` puede crear y listar usuarios mediante `/auth/users`.
 
 ## Alcance y documentación
 
@@ -72,6 +74,7 @@ Los comandos reproducibles están en el README. Se comprobaron:
 - URL codificada de Alembic y respuesta 503 sin filtrar detalles internos;
 - registro inicial, rechazo del segundo registro, login correcto/incorrecto,
   `/auth/me`, protección de organizaciones, token inválido y auditoría de alta;
+- creación/listado administrativo de usuarios y rechazo HTTP 403 para técnicos;
 - Ruff, `pip check` y compilación de Python.
 
 La suite ampliada contiene 11 casos, incluidos los dos de integración optativa.
@@ -98,7 +101,8 @@ Estos puntos se reportan sin rediseñar el dominio ni añadir funcionalidades:
   activa o un solo perfil fiscal predeterminado. Definir su implementación antes
   de habilitar escrituras funcionales sobre esas entidades.
 - **Trazabilidad:** existe `AuditUserMixin`, pero las entidades no lo utilizan;
-  faltan `created_by`/`updated_by` y la identidad autenticada que los complete.
+  organizaciones ya conservan `created_by`/`updated_by`; faltan extenderlo a las
+  demás entidades cuando se incorporen y registrar cambios posteriores.
 - **Roles:** el contrato de alta usa `estado_relacion="cliente"` por defecto,
   mientras el dominio también tiene `organizacion_rol`. Revisar el significado
   y valor inicial antes de ampliar la API; se conservó el comportamiento actual.

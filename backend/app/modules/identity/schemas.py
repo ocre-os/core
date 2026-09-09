@@ -10,6 +10,10 @@ class RegisterRequest(BaseModel):
     nombre_mostrado: str = Field(min_length=1, max_length=160)
 
 
+class UserCreateRequest(RegisterRequest):
+    rol: str = Field(default="tecnico", pattern="^(admin|tecnico)$")
+
+
 class LoginRequest(BaseModel):
     email: str = Field(min_length=3, max_length=320)
     password: str = Field(min_length=1, max_length=256)
@@ -26,5 +30,6 @@ class UserRead(BaseModel):
     id: UUID
     email: str
     nombre_mostrado: str
+    rol: str
     activo: bool
     ultimo_acceso_at: datetime | None

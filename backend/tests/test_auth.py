@@ -20,8 +20,8 @@ def client():
 def test_bootstrap_login_and_protected_organization():
     test_client, engine = client()
     try:
-        response = test_client.get("/api/v1/organizaciones")
-        assert response.status_code == 401
+        response = test_client.get("/api/v1/organizaciones", headers={"Authorization": "Bearer invalid"})
+        assert response.status_code == 401, response.text
         response = test_client.post("/api/v1/auth/register", json={"email": "Admin@Example.com", "password": "correct horse battery", "nombre_mostrado": "Admin"})
         assert response.status_code == 201
         assert "password_hash" not in response.text
@@ -34,6 +34,12 @@ def test_bootstrap_login_and_protected_organization():
         assert created.status_code == 201
         assert created.json().get("created_by", True)
         assert test_client.get("/api/v1/organizaciones", headers=headers).status_code == 200
+        created_user = test_client.post("/api/v1/auth/users", headers=headers, json={"email": "tech@example.com", "password": "correct horse battery", "nombre_mostrado": "Tech", "rol": "tecnico"})
+        assert created_user.status_code == 201
+        assert created_user.json()["rol"] == "tecnico"
+        assert len(test_client.get("/api/v1/auth/users", headers=headers).json()) == 2
+        tech_token = test_client.post("/api/v1/auth/login", json={"email": "tech@example.com", "password": "correct horse battery"}).json()["access_token"]
+        assert test_client.get("/api/v1/auth/users", headers={"Authorization": f"Bearer {tech_token}"}).status_code == 403
         assert test_client.get("/api/v1/organizaciones", headers={"Authorization": "Bearer invalid"}).status_code == 401
     finally:
         app.dependency_overrides.clear()

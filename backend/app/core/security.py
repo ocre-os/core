@@ -52,8 +52,8 @@ def create_access_token(user_id: UUID) -> str:
 
 
 def get_current_user(
-    authorization: Annotated[str | None, Header()] ,
     db: Annotated[Session, Depends(get_db)],
+    authorization: str = Header(default=""),
 ) -> Usuario:
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="autenticacion_requerida")
@@ -73,3 +73,12 @@ def get_current_user(
     if user is None or not user.activo:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="usuario_inactivo")
     return user
+
+
+def require_role(*roles: str):
+    def dependency(user: Annotated[Usuario, Depends(get_current_user)]) -> Usuario:
+        if user.rol not in roles:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="permisos_insuficientes")
+        return user
+
+    return dependency

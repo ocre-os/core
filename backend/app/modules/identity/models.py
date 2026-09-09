@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from sqlalchemy import Boolean, DateTime, ForeignKey, String, Uuid
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, Uuid, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -14,6 +14,7 @@ class Usuario(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     email: Mapped[str] = mapped_column(String(320), unique=True, nullable=False, index=True)
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     nombre_mostrado: Mapped[str] = mapped_column(String(160), nullable=False)
+    rol: Mapped[str] = mapped_column(String(30), default="tecnico", server_default=text("'tecnico'"), nullable=False)
     activo: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     contacto_id: Mapped[UUID | None] = mapped_column(
         Uuid(as_uuid=True), ForeignKey("contacto.id"), nullable=True
