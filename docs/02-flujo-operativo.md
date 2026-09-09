@@ -11,9 +11,32 @@ Definir el ciclo de vida de una atención dentro de Ocre OS, desde el primer con
 
 ## 2. Cadena principal
 
-Contacto 0 → Solicitud → Caso → Servicio → Visita → Reporte
+El flujo general de atención es:
 
-Esta cadena representa una secuencia lógica del negocio, no necesariamente una relación uno a uno entre objetos.
+Interacción
+→ Clasificación inicial
+→ Solicitud
+→ Caso
+→ Servicio
+→ Visita
+→ Reporte
+→ Seguimiento o cierre
+
+Esta cadena representa una secuencia lógica del negocio y no una relación obligatoria uno a uno entre objetos.
+
+Una interacción puede relacionarse directamente con información ya existente y no necesariamente generar una nueva Solicitud o un nuevo Caso.
+
+Ejemplos:
+
+- una interacción puede generar una nueva Solicitud;
+- una interacción puede agregarse a un Caso existente;
+- una Solicitud puede resolverse sin requerir una visita;
+- un Caso puede contener múltiples Servicios;
+- un Servicio puede requerir múltiples Visitas;
+- una Visita puede generar uno o varios Reportes;
+- un Caso cerrado puede reabrirse posteriormente.
+
+Ocre OS debe preservar la continuidad de la información independientemente del camino que siga cada atención.
 
 ---
 
@@ -127,6 +150,44 @@ El historial de interacciones podrá utilizarse para analizar:
 - necesidades de capacitación;
 - efectividad de canales;
 - y calidad del seguimiento.
+
+## 3.2 Clasificación inicial
+
+### Propósito
+
+Determinar a qué elemento del sistema pertenece una nueva Interacción y qué acción debe realizarse como consecuencia.
+
+La clasificación inicial evita generar innecesariamente nuevas Solicitudes o Casos cuando la comunicación corresponde a información ya existente.
+
+### Durante la clasificación se debe intentar determinar
+
+- quién está realizando la interacción;
+- a qué Organización pertenece;
+- si existe un Equipo relacionado;
+- si existe una Solicitud relacionada;
+- si existe un Caso relacionado;
+- cuál es la necesidad expresada;
+- si existe una atención anterior potencialmente relacionada;
+- y cuál debe ser la siguiente acción.
+
+### Resultados posibles
+
+Una Interacción clasificada puede:
+
+- generar una nueva Solicitud;
+- agregarse a una Solicitud existente;
+- agregarse a un Caso existente;
+- provocar la reapertura provisional de un Caso;
+- actualizar información existente;
+- generar un Pendiente;
+- registrarse únicamente como comunicación;
+- o cerrarse sin requerir otra acción.
+
+### Principio
+
+La clasificación debe ocurrir antes de decidir automáticamente que una nueva comunicación representa un nuevo Caso.
+
+Cuando exista incertidumbre razonable sobre su relación con un Caso anterior, deberá preservarse inicialmente la continuidad del historial hasta obtener evidencia suficiente para clasificarla correctamente.
 
 ---
 
