@@ -27,3 +27,5 @@ class OrganizacionRead(BaseModel):
     notas: str | None
     created_at: datetime
     updated_at: datetime
+    created_by: UUID | None
+    updated_by: UUID | None

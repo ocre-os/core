@@ -17,6 +17,14 @@ class Settings(BaseSettings):
         default="postgresql+psycopg://ocre_os:change_me@db:5432/ocre_os",
         validation_alias=AliasChoices("DATABASE_URL", "OCRE_DATABASE_URL"),
     )
+    auth_secret: str = Field(
+        default="development-only-change-this-secret",
+        validation_alias=AliasChoices("OCRE_AUTH_SECRET", "AUTH_SECRET"),
+    )
+    token_ttl_minutes: int = Field(
+        default=60,
+        validation_alias=AliasChoices("OCRE_TOKEN_TTL_MINUTES", "TOKEN_TTL_MINUTES"),
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",

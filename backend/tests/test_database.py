@@ -16,7 +16,9 @@ from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
 from app.core.database import get_db
+from app.core.security import create_access_token, hash_password
 from app.main import app
+from app.modules.identity.models import Usuario
 from app.modules.organizations.models import Organizacion
 
 pytestmark = pytest.mark.skipif(
@@ -82,8 +84,14 @@ def api_client(engine):
 
     previous = app.dependency_overrides.copy()
     app.dependency_overrides[get_db] = override_db
+    with Session(engine) as session:
+        user = Usuario(email="test@example.com", password_hash=hash_password("test password 123"), nombre_mostrado="Test")
+        session.add(user)
+        session.commit()
+        token = create_access_token(user.id)
     try:
         with TestClient(app) as client:
+            client.headers.update({"Authorization": f"Bearer {token}"})
             yield client
     finally:
         app.dependency_overrides.clear()

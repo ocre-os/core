@@ -4,9 +4,9 @@ import sys
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
+from pydantic import ValidationError
 
-from app.main import app
+from app.modules.organizations.schemas import OrganizacionCreate
 
 
 def test_migration_url_accepts_percent_encoded_password() -> None:
@@ -34,10 +34,8 @@ def test_migration_url_accepts_percent_encoded_password() -> None:
     ],
 )
 def test_organization_rejects_oversized_fields(field: str, max_length: int) -> None:
-    with TestClient(app, raise_server_exceptions=False) as client:
-        response = client.post(
-            "/api/v1/organizaciones",
-            json={"nombre_comercial": "Prueba de validación", field: "x" * (max_length + 1)},
+    with pytest.raises(ValidationError) as error:
+        OrganizacionCreate.model_validate(
+            {"nombre_comercial": "Prueba", field: "x" * (max_length + 1)}
         )
-    assert response.status_code == 422
-    assert response.json()["detail"][0]["loc"] == ["body", field]
+    assert error.value.errors()[0]["loc"] == (field,)

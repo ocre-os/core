@@ -17,6 +17,8 @@ Fecha: 2026-09-09. Rama: `feat/v0-foundation`.
 - No se instaló Docker Desktop, Coolify, Redis ni Kubernetes.
 - Dependencias resueltas dentro de las imágenes: FastAPI 0.141.1,
   SQLAlchemy 2.0.52, Alembic 1.19.2 y psycopg 3.3.5; pytest 8.4.2 en desarrollo.
+- Autenticación local con hash `scrypt`, tokens HMAC con expiración y registro
+  inicial de un único usuario mientras la tabla `usuario` está vacía.
 
 ## Alcance y documentación
 
@@ -68,6 +70,8 @@ Los comandos reproducibles están en el README. Se comprobaron:
 - persistencia, lectura, paginación, archivo lógico y errores 404/422 de organizaciones;
 - rechazo de seis campos demasiado largos y aceptación de sus longitudes máximas;
 - URL codificada de Alembic y respuesta 503 sin filtrar detalles internos;
+- registro inicial, rechazo del segundo registro, login correcto/incorrecto,
+  `/auth/me`, protección de organizaciones, token inválido y auditoría de alta;
 - Ruff, `pip check` y compilación de Python.
 
 La suite ampliada contiene 11 casos, incluidos los dos de integración optativa.
@@ -85,9 +89,10 @@ identifican en el historial Git de la rama; la integración a `main` requiere re
 
 Estos puntos se reportan sin rediseñar el dominio ni añadir funcionalidades:
 
-- **Seguridad:** falta autenticación/autorización. El usuario de PostgreSQL del
-  Compose es administrador y el backend ejecuta como root dentro del contenedor.
-  Esta configuración es local, no una configuración de producción.
+- **Seguridad:** la autenticación interna mínima ya está activa, pero faltan
+  autorización por rol/organización, rotación y revocación de tokens. El usuario
+  de PostgreSQL del Compose es administrador y el backend ejecuta como root dentro
+  del contenedor. Esta configuración es local, no una configuración de producción.
 - **Integridad documentada todavía no implementada:** no hay restricciones
   `hasta >= desde` en relaciones de equipos, ni garantía de una sola ubicación
   activa o un solo perfil fiscal predeterminado. Definir su implementación antes

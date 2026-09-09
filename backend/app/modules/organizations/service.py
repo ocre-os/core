@@ -7,8 +7,8 @@ from app.modules.organizations.models import Organizacion
 from app.modules.organizations.schemas import OrganizacionCreate
 
 
-def crear_organizacion(db: Session, data: OrganizacionCreate) -> Organizacion:
-    organizacion = Organizacion(**data.model_dump())
+def crear_organizacion(db: Session, data: OrganizacionCreate, user_id: UUID) -> Organizacion:
+    organizacion = Organizacion(**data.model_dump(), created_by=user_id, updated_by=user_id)
     db.add(organizacion)
     db.commit()
     db.refresh(organizacion)

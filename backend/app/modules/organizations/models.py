@@ -19,6 +19,8 @@ class Organizacion(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     estado_relacion: Mapped[str | None] = mapped_column(String(60), nullable=True)
     notas: Mapped[str | None] = mapped_column(Text, nullable=True)
     archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    created_by: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), ForeignKey("usuario.id"), nullable=True)
+    updated_by: Mapped[UUID | None] = mapped_column(Uuid(as_uuid=True), ForeignKey("usuario.id"), nullable=True)
 
 
 class OrganizacionRol(UUIDPrimaryKeyMixin, Base):
