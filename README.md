@@ -31,6 +31,8 @@ de ejemplo y puertos limitados a localhost. La autenticación interna está acti
 el primer usuario se registra una sola vez y las rutas de organizaciones requieren
 un token Bearer. Usa datos ficticios y conserva `.env` fuera de Git. En un entorno
 real cambia `OCRE_AUTH_SECRET` por un valor aleatorio largo.
+Los contactos se gestionan con `/api/v1/contactos` y pueden vincularse de forma
+explícita a organizaciones mediante `/api/v1/contactos/{id}/organizaciones`.
 Si cambias las credenciales locales, mantén `POSTGRES_*` y `DATABASE_URL` coherentes;
 los caracteres especiales de la URL deben codificarse como URL. Cambiar `.env` no
 cambia la contraseña de una base ya inicializada.

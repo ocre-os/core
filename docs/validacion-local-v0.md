@@ -21,6 +21,8 @@ Fecha: 2026-09-09. Rama: `feat/v0-foundation`.
   inicial de un único usuario mientras la tabla `usuario` está vacía.
 - Autorización interna inicial con roles `admin` y `tecnico`: el primer usuario
   es `admin`; solo `admin` puede crear y listar usuarios mediante `/auth/users`.
+- Contactos autenticados con alta, listado, consulta y vínculo explícito a una
+  organización, incluyendo área, cargo, roles y capacidades operativas.
 
 ## Alcance y documentación
 
@@ -75,9 +77,11 @@ Los comandos reproducibles están en el README. Se comprobaron:
 - registro inicial, rechazo del segundo registro, login correcto/incorrecto,
   `/auth/me`, protección de organizaciones, token inválido y auditoría de alta;
 - creación/listado administrativo de usuarios y rechazo HTTP 403 para técnicos;
+- alta, listado y consulta de contactos, vínculo Contacto–Organización y rechazo
+  de vínculos duplicados;
 - Ruff, `pip check` y compilación de Python.
 
-La suite ampliada contiene 11 casos, incluidos los dos de integración optativa.
+La suite ampliada contiene 13 casos, incluidos los dos de integración optativa.
 Antes de las correcciones, las siete regresiones nuevas fallaban y la prueba
 original de liveness pasaba. Después de corregir, los 11 casos pasan.
 Las bases temporales se eliminan al finalizar; no se cargaron organizaciones
