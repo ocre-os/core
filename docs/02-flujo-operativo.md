@@ -563,7 +563,7 @@ Debe ser posible reconstruir posteriormente:
 
 ---
 
-## 10. Principio de no pérdida de contexto
+## 11. Principio de no pérdida de contexto
 
 La información obtenida en una etapa no debe descartarse cuando el proceso avanza.
 
