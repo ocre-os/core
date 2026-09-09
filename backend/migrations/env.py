@@ -5,6 +5,10 @@ from sqlalchemy import engine_from_config, pool
 
 from app.core.config import get_settings
 from app.core.database import Base
+from app.modules.equipment import models as equipment_models  # noqa: F401
+from app.modules.identity import models as identity_models  # noqa: F401
+from app.modules.organizations import models as organization_models  # noqa: F401
+from app.shared.files import models as file_models  # noqa: F401
 
 config = context.config
 settings = get_settings()
