@@ -1,7 +1,7 @@
 # Modelo Operativo de Ocre OS
 
 **Estado:** Borrador  
-**Versión:** 0.1
+**Versión:** 0.2
 
 ## 1. Propósito del documento
 
@@ -135,50 +135,55 @@ El sistema debe evitar solicitar repetidamente información que ya conoce, pero 
 
 ---
 
-# 4. Inicio de una relación: Contacto 0
+# 4. Inicio de una atención: Interacción y Contacto 0
 
-Toda relación puede comenzar con información incompleta.
+Toda atención comienza con una **Interacción**, es decir, con un evento de comunicación que Ocre recibe o registra.
 
-Una persona puede comunicarse mediante:
+La Interacción puede producirse mediante:
 
 - llamada telefónica;
 - WhatsApp;
 - correo electrónico;
 - formulario;
+- mensaje desde el portal;
 - recomendación;
 - referencia de otra persona;
 - contacto presencial;
 - u otro canal.
 
-En ese momento puede desconocerse:
+La Interacción debe conservarse incluso cuando posteriormente se determine que corresponde a información ya existente.
 
-- quién es exactamente;
-- a qué empresa pertenece;
-- si ya existe como cliente;
-- qué equipo tiene;
-- qué servicio necesita;
-- o incluso si la comunicación terminará convirtiéndose en un servicio.
+En el momento de recibirla puede desconocerse:
 
-Ocre OS debe permitir registrar esta interacción sin obligar a inventar información inexistente.
+- quién es exactamente la persona;
+- a qué Organización pertenece;
+- si ya existe como Contacto;
+- si existe una Solicitud relacionada;
+- si existe un Caso relacionado;
+- qué Equipo está involucrado;
+- cuál es la necesidad concreta;
+- o qué acción debe realizarse.
 
-Denominamos provisionalmente a este momento:
+Ocre OS debe permitir registrar esta realidad sin obligar a inventar información inexistente.
+
+Cuando no exista información suficiente para clasificar la Interacción con certeza, podrá utilizarse provisionalmente la clasificación:
 
 **Contacto 0 (C0)**
 
-Contacto 0 representa el nacimiento de una posible relación o necesidad dentro del sistema.
+Contacto 0 no representa una persona, una Organización ni una Interacción adicional. Representa únicamente que la Interacción todavía requiere clasificación.
 
-Como mínimo debe ser posible conservar:
+Al resolverse C0, la Interacción puede:
 
-- fecha y hora;
-- canal de contacto;
-- información disponible para volver a contactar a la persona;
-- nombre, si se conoce;
-- empresa, si se conoce;
-- origen o referencia del contacto;
-- descripción inicial de lo comunicado;
-- y responsable de seguimiento.
+- relacionarse con un Contacto existente;
+- relacionarse con una Organización existente;
+- relacionarse con una Solicitud existente;
+- relacionarse con un Caso existente;
+- generar una nueva Solicitud;
+- actualizar información existente;
+- generar un Pendiente;
+- o cerrarse sin acción posterior.
 
-Contacto 0 no implica automáticamente que exista un cliente ni que exista un servicio contratado.
+Resolver o cerrar Contacto 0 nunca elimina la Interacción que lo originó.
 
 ---
 
